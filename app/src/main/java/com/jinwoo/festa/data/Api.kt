@@ -8,5 +8,5 @@ interface Api {
     @GET("events")
     fun getEventList(@Query("page") page: Int
                      , @Query("pageSize") pageSize: Int,
-                     @Query("order") order: String): Flowable<>
+                     @Query("order") order: String): Flowable<PageData>
 }
