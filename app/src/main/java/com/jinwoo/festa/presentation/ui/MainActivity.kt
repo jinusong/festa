@@ -1,7 +1,8 @@
-package com.jinwoo.festa
+package com.jinwoo.festa.presentation.ui
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import com.jinwoo.festa.R
 
 class MainActivity : AppCompatActivity() {
 
