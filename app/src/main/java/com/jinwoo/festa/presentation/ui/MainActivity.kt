@@ -6,8 +6,10 @@ import com.jinwoo.festa.R
 import com.jinwoo.festa.domain.entity.EventEntity
 import com.jinwoo.festa.presentation.adapter.EventListAdapter
 import com.jinwoo.festa.presentation.main.MainContract
+import com.jinwoo.festa.presentation.model.EventModel
 import com.jinwoo.festa.presentation.ui.base.BaseActivity
 import kotlinx.android.synthetic.main.activity_main.*
+import org.jetbrains.anko.toast
 import javax.inject.Inject
 
 class MainActivity : BaseActivity(), MainContract.View {
@@ -21,8 +23,10 @@ class MainActivity : BaseActivity(), MainContract.View {
         presenter.createView(this)
     }
 
-    override fun setEventListAdapter(models: ArrayList<EventEntity>) {
+    override fun setEventListAdapter(models: ArrayList<EventModel>) {
         main_event_list.adapter = EventListAdapter(models)
         main_event_list.layoutManager = GridLayoutManager(this, 2 )
     }
+
+    override fun createToast(text: String) { toast(text) }
 }
