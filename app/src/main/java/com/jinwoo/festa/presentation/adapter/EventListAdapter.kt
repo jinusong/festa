@@ -9,9 +9,10 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.jinwoo.festa.R
 import com.jinwoo.festa.domain.entity.EventEntity
+import com.jinwoo.festa.presentation.model.EventModel
 import org.jetbrains.anko.find
 
-class EventListAdapter(val models: ArrayList<EventEntity>): RecyclerView.Adapter<EventListAdapter.EventListViewHolder>() {
+class EventListAdapter(val models: ArrayList<EventModel>): RecyclerView.Adapter<EventListAdapter.EventListViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): EventListViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.item_event_list, parent, false)
@@ -29,7 +30,7 @@ class EventListAdapter(val models: ArrayList<EventEntity>): RecyclerView.Adapter
         val itemEventHost = itemView.find<TextView>(R.id.item_event_host)
         val itemEventPrice = itemView.find<TextView>(R.id.item_event_price)
 
-        fun bind(model: EventEntity) {
+        fun bind(model: EventModel) {
             with(model) {
                 Glide.with(itemEventImage).load(eventImageUrl).into(itemEventImage)
                 itemEventDate.text = eventDate
