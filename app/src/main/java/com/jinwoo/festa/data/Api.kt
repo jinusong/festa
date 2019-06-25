@@ -1,5 +1,6 @@
 package com.jinwoo.festa.data
 
+import com.jinwoo.festa.data.entity.PageData
 import io.reactivex.Flowable
 import retrofit2.http.GET
 import retrofit2.http.Query

@@ -1,5 +1,6 @@
 package com.jinwoo.festa.presentation.di.app
 
+import com.jinwoo.festa.presentation.di.component.DaggerAppComponent
 import dagger.android.AndroidInjector
 import dagger.android.support.DaggerApplication
 
