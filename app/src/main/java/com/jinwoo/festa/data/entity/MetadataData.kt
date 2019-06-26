@@ -1,3 +1,7 @@
 package com.jinwoo.festa.data.entity
 
-data class MetadataData(val coverImage: String)
+import com.google.gson.annotations.SerializedName
+
+data class MetadataData(
+    @SerializedName("coverImage")
+    val coverImage: String)

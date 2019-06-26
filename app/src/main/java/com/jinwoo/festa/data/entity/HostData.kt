@@ -1,3 +1,7 @@
 package com.jinwoo.festa.data.entity
 
-data class HostData (val name: String)
+import com.google.gson.annotations.SerializedName
+
+data class HostData (
+    @SerializedName("name")
+    val name: String)
