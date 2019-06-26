@@ -1,9 +1,9 @@
 package com.jinwoo.festa.presentation.ui
 
 import android.os.Bundle
+import android.util.Log
 import androidx.recyclerview.widget.GridLayoutManager
 import com.jinwoo.festa.R
-import com.jinwoo.festa.domain.entity.EventEntity
 import com.jinwoo.festa.presentation.adapter.EventListAdapter
 import com.jinwoo.festa.presentation.main.MainContract
 import com.jinwoo.festa.presentation.model.EventModel
@@ -25,7 +25,7 @@ class MainActivity : BaseActivity(), MainContract.View {
 
     override fun setEventListAdapter(models: ArrayList<EventModel>) {
         main_event_list.adapter = EventListAdapter(models)
-        main_event_list.layoutManager = GridLayoutManager(this, 2 )
+        main_event_list.layoutManager = GridLayoutManager(this, 2)
     }
 
     override fun createToast(text: String) { toast(text) }

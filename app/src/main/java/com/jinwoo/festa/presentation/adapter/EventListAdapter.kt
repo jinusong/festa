@@ -1,5 +1,6 @@
 package com.jinwoo.festa.presentation.adapter
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -31,6 +32,7 @@ class EventListAdapter(val models: ArrayList<EventModel>): RecyclerView.Adapter<
         val itemEventPrice = itemView.find<TextView>(R.id.item_event_price)
 
         fun bind(model: EventModel) {
+            Log.d("model", model.toString())
             with(model) {
                 Glide.with(itemEventImage).load(eventImageUrl).into(itemEventImage)
                 itemEventDate.text = eventDate

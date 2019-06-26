@@ -4,8 +4,7 @@ import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.disposables.Disposable
 import java.lang.ref.WeakReference
 
-abstract class BasePresenter<T: BaseContract.View>:
-    BaseContract.Presenter<T> {
+abstract class BasePresenter<T: BaseContract.View>: BaseContract.Presenter<T> {
     var weakReference: WeakReference<T>? =  null
 
     val view: T
