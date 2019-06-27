@@ -14,4 +14,15 @@ class EventModelMapper: Mapper<EventEntity, EventModel> {
         eventImageUrl = from.eventImageUrl,
         hostName = from.hostName
     )
+
+    fun mapModelToEntity(from: EventModel): EventEntity = EventEntity(
+        eventId = from.eventId,
+        eventName = from.eventName,
+        eventDate = from.eventDate,
+        ticketPriceRange = from.ticketPriceRange,
+        locationName = from.locationName,
+        eventImageUrl = from.eventImageUrl,
+        hostName = from.hostName,
+        tickets = ArrayList()
+    )
 }

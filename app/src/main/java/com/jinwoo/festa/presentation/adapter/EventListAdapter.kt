@@ -32,7 +32,6 @@ class EventListAdapter(val models: ArrayList<EventModel>): RecyclerView.Adapter<
         val itemEventPrice = itemView.find<TextView>(R.id.item_event_price)
 
         fun bind(model: EventModel) {
-            Log.d("model", model.toString())
             with(model) {
                 Glide.with(itemEventImage).load(eventImageUrl).into(itemEventImage)
                 itemEventDate.text = eventDate

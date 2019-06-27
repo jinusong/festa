@@ -1,6 +1,8 @@
 package com.jinwoo.festa.presentation.di.module.main
 
+import android.content.Context
 import com.jinwoo.festa.data.Api
+import com.jinwoo.festa.data.database.EventDatabase
 import com.jinwoo.festa.data.datasource.EventDataSource
 import com.jinwoo.festa.data.datasource.EventDataSourceImpl
 import com.jinwoo.festa.data.mapper.EventDataMapper
@@ -16,14 +18,25 @@ import com.jinwoo.festa.presentation.mapper.EventModelMapper
 import dagger.Module
 import dagger.Provides
 import io.reactivex.disposables.CompositeDisposable
+import androidx.room.Room
+import com.jinwoo.festa.data.database.dao.EventDao
+
 
 @Module
 class MainModule {
+    @ActivityScope
+    @Provides
+    fun provideEventDatabase(context: Context): EventDatabase
+            = Room.databaseBuilder(context, EventDatabase::class.java, "event.db").build()
 
     @ActivityScope
     @Provides
-    fun provideEventDataSource(api: Api): EventDataSource
-            = EventDataSourceImpl(api)
+    fun provideEventDao(database: EventDatabase): EventDao = database.eventDao
+
+    @ActivityScope
+    @Provides
+    fun provideEventDataSource(api: Api, eventDao: EventDao): EventDataSource
+            = EventDataSourceImpl(api, eventDao)
 
     @ActivityScope
     @Provides
@@ -50,6 +63,7 @@ class MainModule {
 
     @ActivityScope
     @Provides
-    fun providePresenter(getEventListUseCase: GetEventListUseCase, eventModelMapper: EventModelMapper): MainContract.Presenter
+    fun providePresenter(getEventListUseCase: GetEventListUseCase,
+                         eventModelMapper: EventModelMapper): MainContract.Presenter
             = MainPresenter(getEventListUseCase, eventModelMapper)
 }
