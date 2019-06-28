@@ -1,5 +1,6 @@
 package com.jinwoo.festa.presentation.main
 
+import android.util.Log
 import com.jinwoo.festa.domain.entity.EventEntity
 import com.jinwoo.festa.domain.usecase.GetEventListUseCase
 import com.jinwoo.festa.presentation.base.BasePresenter
@@ -55,6 +56,7 @@ class MainPresenter(val getEventListUseCase: GetEventListUseCase, val eventModel
 
     override fun destroyView() {
         super.destroyView()
-        getEventListUseCase.dispose()
+        getEventListUseCase.clear()
     }
+
 }

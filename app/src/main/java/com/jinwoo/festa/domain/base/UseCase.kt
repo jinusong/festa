@@ -22,5 +22,5 @@ abstract class UseCase<T, E>(val composite: CompositeDisposable) {
         composite.add(observer)
     }
 
-    fun dispose() = composite.dispose()
+    fun clear() = composite.clear()
 }
