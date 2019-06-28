@@ -6,22 +6,22 @@ import java.util.*
 import kotlin.collections.ArrayList
 
 class EventServiceImpl(val repo: EventRepository): EventService {
-    override fun getEventList(pageSize: Int): Flowable<ArrayList<EventEntity>>
+    override fun getEventList(pageSize: Int): Flowable<List<EventEntity>>
             = repo.getEventList(pageSize).map { mapEventEntityList(it) }
 
-    override fun getLocalEventList(): ArrayList<EventEntity>
+    override fun getLocalEventList(): List<EventEntity>
             = repo.getLocalEventList()
 
-    override fun saveLocalEventList(eventList: ArrayList<EventEntity>)
+    override fun saveLocalEventList(eventList: List<EventEntity>)
             = repo.saveLocalEventList(eventList)
 
-    private fun mapEventEntityList(eventList: ArrayList<EventEntity>): ArrayList<EventEntity>
-            = ArrayList(eventList.map { event ->
+    private fun mapEventEntityList(eventList: List<EventEntity>): List<EventEntity>
+            = eventList.map { event ->
         event.ticketPriceRange = createTicketPriceRange(event)
         event.eventDate = createKoreaDate(event.eventDate)
 
         return@map event
-    })
+    }
 
     private fun createTicketPriceRange(event: EventEntity): String {
         if (event.tickets.isEmpty()) return "외부 이벤트"

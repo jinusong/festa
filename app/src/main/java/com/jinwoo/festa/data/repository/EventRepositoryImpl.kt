@@ -8,13 +8,12 @@ import io.reactivex.Flowable
 
 class EventRepositoryImpl(val datasource: EventDataSource, val eventDataMapper: EventDataMapper): EventRepository {
 
-    override fun getEventList(pageSize: Int): Flowable<ArrayList<EventEntity>>
-            = datasource.getRemoteEventList(pageSize).map {
-        ArrayList(it.rows.map { eventDataMapper.mapFrom(it) })}
+    override fun getEventList(pageSize: Int): Flowable<List<EventEntity>>
+            = datasource.getRemoteEventList(pageSize).map { it.rows.map { eventDataMapper.mapFrom(it) }}
 
-    override fun getLocalEventList(): ArrayList<EventEntity>
-            = ArrayList(datasource.getDbEventList().map { eventDataMapper.mapDbToEntity(it) })
+    override fun getLocalEventList(): List<EventEntity>
+            = datasource.getDbEventList().map { eventDataMapper.mapDbToEntity(it) }
 
-    override fun saveLocalEventList(eventList: ArrayList<EventEntity>)
+    override fun saveLocalEventList(eventList: List<EventEntity>)
             = eventList.forEach { datasource.saveDbEventList(eventDataMapper.mapEntityToDb(it)) }
 }

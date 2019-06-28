@@ -9,5 +9,5 @@ interface EventDataSource {
 
     fun saveDbEventList(event: Event)
 
-    fun getDbEventList(): ArrayList<Event>
+    fun getDbEventList(): List<Event>
 }

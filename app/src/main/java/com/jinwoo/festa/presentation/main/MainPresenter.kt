@@ -27,7 +27,7 @@ class MainPresenter(val getEventListUseCase: GetEventListUseCase, val eventModel
     private fun getRemoteEventList() {
         val eventList = ArrayList<EventModel>()
         getEventListUseCase.execute(24,
-            object: DisposableSubscriber<ArrayList<EventEntity>>() {
+            object: DisposableSubscriber<List<EventEntity>>() {
                 override fun onComplete() {
                     view.createToast("조회 성공")
                     CoroutineScope(Dispatchers.IO).launch {
@@ -36,7 +36,7 @@ class MainPresenter(val getEventListUseCase: GetEventListUseCase, val eventModel
                     }
                     view.setEventListAdapter(eventList)
                 }
-                override fun onNext(t: ArrayList<EventEntity>) {
+                override fun onNext(t: List<EventEntity>) {
                     t.map { eventList.add(eventModelMapper.mapFrom(it)) }
                 }
                 override fun onError(t: Throwable) {

@@ -7,11 +7,11 @@ import io.reactivex.Flowable
 import io.reactivex.disposables.CompositeDisposable
 
 class GetEventListUseCase(val service: EventService, composite: CompositeDisposable)
-    : UseCase<ArrayList<EventEntity>, Int>(composite) {
-    override fun createFlowable(data: Int): Flowable<ArrayList<EventEntity>>
+    : UseCase<List<EventEntity>, Int>(composite) {
+    override fun createFlowable(data: Int): Flowable<List<EventEntity>>
             = service.getEventList(data)
 
-    fun getLocalEventList(): ArrayList<EventEntity>
+    fun getLocalEventList(): List<EventEntity>
             = service.getLocalEventList()
 
     fun saveLocalEventList(eventList: ArrayList<EventEntity>)

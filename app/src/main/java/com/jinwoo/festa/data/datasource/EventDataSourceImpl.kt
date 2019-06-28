@@ -14,6 +14,6 @@ class EventDataSourceImpl(val api: Api, val eventDao: EventDao): EventDataSource
     override fun saveDbEventList(event: Event)
             = eventDao.saveEventList(event)
 
-    override fun getDbEventList(): ArrayList<Event>
-            = ArrayList(eventDao.getEventList())
+    override fun getDbEventList(): List<Event>
+            = eventDao.getEventList()
 }

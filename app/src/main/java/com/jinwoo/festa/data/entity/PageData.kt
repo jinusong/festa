@@ -4,4 +4,4 @@ import com.google.gson.annotations.SerializedName
 
 data class PageData(
     @SerializedName("rows")
-    val rows: ArrayList<EventData>)
+    val rows: List<EventData>)
