@@ -9,7 +9,6 @@ import com.jinwoo.festa.data.entity.TicketData
 
 @Entity
 data class Event(
-    @PrimaryKey
     val eventId: Int,
     val eventName: String,
     var eventDate: String,

@@ -9,7 +9,7 @@ import io.reactivex.Flowable
 class EventRepositoryImpl(val datasource: EventDataSource, val eventDataMapper: EventDataMapper): EventRepository {
 
     override fun getEventList(pageSize: Int): Flowable<List<EventEntity>>
-            = datasource.getRemoteEventList(pageSize).map { it.rows.map { eventDataMapper.mapFrom(it) }}
+            = datasource.getRemoteEventList(pageSize).map { it.map { eventDataMapper.mapFrom(it) }}
 
     override fun getLocalEventList(): List<EventEntity>
             = datasource.getDbEventList().map { eventDataMapper.mapDbToEntity(it) }
