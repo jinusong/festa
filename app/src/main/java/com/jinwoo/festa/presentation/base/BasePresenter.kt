@@ -1,7 +1,5 @@
 package com.jinwoo.festa.presentation.base
 
-import io.reactivex.disposables.CompositeDisposable
-import io.reactivex.disposables.Disposable
 import java.lang.ref.WeakReference
 
 abstract class BasePresenter<T: BaseContract.View>: BaseContract.Presenter<T> {
