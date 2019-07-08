@@ -7,5 +7,6 @@ data class EventModel(
     val ticketPriceRange: String,
     val locationName: String,
     val eventImageUrl: String,
-    val hostName: String
+    val hostName: String,
+    var state: Boolean
 )

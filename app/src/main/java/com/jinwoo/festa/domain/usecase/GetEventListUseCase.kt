@@ -10,10 +10,4 @@ class GetEventListUseCase(val service: EventService, composite: CompositeDisposa
     : UseCase<List<EventEntity>, Int>(composite) {
     override fun createFlowable(data: Int): Flowable<List<EventEntity>>
             = service.getEventList(data)
-
-    fun getLocalEventList(): List<EventEntity>
-            = service.getLocalEventList()
-
-    fun saveLocalEventList(eventList: ArrayList<EventEntity>)
-            = service.saveLocalEventList(eventList)
 }

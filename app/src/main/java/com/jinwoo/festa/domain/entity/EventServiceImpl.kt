@@ -6,14 +6,11 @@ import java.util.*
 import kotlin.collections.ArrayList
 
 class EventServiceImpl(val repo: EventRepository): EventService {
-    override fun getEventList(pageSize: Int): Flowable<List<EventEntity>>
-            = repo.getEventList(pageSize).map { mapEventEntityList(it) }
-
-    override fun getLocalEventList(): List<EventEntity>
-            = repo.getLocalEventList()
-
-    override fun saveLocalEventList(eventList: List<EventEntity>)
-            = repo.saveLocalEventList(eventList)
+    override fun getEventList(pageSize: Int): Flowable<List<EventEntity>> =
+        repo.getEventList(pageSize).map {
+            repo.saveLocalEventList(it)
+            mapEventEntityList(it)
+        }.onErrorReturn { mapEventEntityList(repo.getLocalEventList().reversed()) }
 
     private fun mapEventEntityList(eventList: List<EventEntity>): List<EventEntity>
             = eventList.map { event ->

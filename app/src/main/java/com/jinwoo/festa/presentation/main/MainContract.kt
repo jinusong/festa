@@ -5,7 +5,6 @@ import com.jinwoo.festa.presentation.model.EventModel
 
 interface MainContract{
     interface View: BaseContract.View {
-        fun checkNetwork(): Boolean
         fun setEventListAdapter(models: ArrayList<EventModel>)
         fun createToast(text: String)
     }

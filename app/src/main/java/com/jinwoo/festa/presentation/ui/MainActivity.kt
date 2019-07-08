@@ -24,13 +24,6 @@ class MainActivity : BaseActivity(), MainContract.View {
         presenter.createView(this)
     }
 
-    override fun checkNetwork(): Boolean {
-        val connectivityManager = getSystemService(CONNECTIVITY_SERVICE) as ConnectivityManager
-        if (connectivityManager.activeNetworkInfo != null && connectivityManager.activeNetworkInfo.isConnected)
-            return true
-        return false
-    }
-
     override fun setEventListAdapter(models: ArrayList<EventModel>) {
         main_event_list.adapter = EventListAdapter(models)
         main_event_list.layoutManager = GridLayoutManager(this, 2)

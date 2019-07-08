@@ -8,5 +8,6 @@ data class EventEntity(
     val locationName: String,
     val eventImageUrl: String,
     val hostName: String,
-    var ticketPriceRange: String
+    var ticketPriceRange: String,
+    var state: Boolean
 )

@@ -17,7 +17,8 @@ class EventDataMapper: Mapper<EventData, EventEntity> {
         locationName = from.location.name,
         eventImageUrl = from.metadata.coverImage,
         hostName = hostDataMapper.mapFrom(from.hostOrganization).name,
-        ticketPriceRange = ""
+        ticketPriceRange = "",
+        state = true
     )
 
     fun mapEntityToDb(from: EventEntity): Event = Event(
@@ -39,6 +40,7 @@ class EventDataMapper: Mapper<EventData, EventEntity> {
         locationName = from.locationName,
         eventImageUrl = from.eventImageUrl,
         hostName = from.hostName,
-        tickets = ArrayList()
+        tickets = ArrayList(),
+        state = false
     )
 }
