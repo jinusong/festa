@@ -22,7 +22,7 @@ class MainPresenter(val getEventListUseCase: GetEventListUseCase, val eventModel
                 override fun onComplete() {
                     if (eventList.first().state) view.createToast("조회 성공")
                     else view.createToast("네트워크 상태를 확인해주세요.")
-                    view.setEventListAdapter(eventList)
+                    view.showEventListAdapter(eventList)
                 }
                 override fun onNext(t: List<EventEntity>) {
                     t.map { eventList.add(eventModelMapper.mapFrom(it)) }

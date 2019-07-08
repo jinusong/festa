@@ -24,7 +24,7 @@ class MainActivity : BaseActivity(), MainContract.View {
         presenter.createView(this)
     }
 
-    override fun setEventListAdapter(models: ArrayList<EventModel>) {
+    override fun showEventListAdapter(models: ArrayList<EventModel>) {
         main_event_list.adapter = EventListAdapter(models)
         main_event_list.layoutManager = GridLayoutManager(this, 2)
     }
