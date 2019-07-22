@@ -1,10 +1,9 @@
-package com.jinwoo.festa.domain.entity
+package com.jinwoo.festa.presentation.model
 
-data class EventEntity(
+data class EventModel(
     val eventId: Int,
     val eventName: String,
     var eventDate: String,
-    val tickets: ArrayList<TicketEntity>,
     val locationName: String,
     val eventImageUrl: String,
     val hostName: String,
