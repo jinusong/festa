@@ -7,7 +7,7 @@ import io.reactivex.Flowable
 interface EventDataSource {
     fun getRemoteEventList(pageSize: Int): Flowable<List<EventData>>
 
-    fun saveDbEventList(event: Event)
+    fun saveDbEventList(event: List<Event>)
 
     fun getDbEventList(): List<Event>
 }

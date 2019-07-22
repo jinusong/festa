@@ -3,9 +3,9 @@ package com.jinwoo.festa.domain.entity
 import io.reactivex.Flowable
 
 interface EventRepository {
-    fun getEventList(pageSize: Int): Flowable<List<EventEntity>>
+    fun getEventList(pageSize: Int): Flowable<EventListEntity>
 
-    fun getLocalEventList(): List<EventEntity>
+    fun getLocalEventList(): EventListEntity
 
-    fun saveLocalEventList(eventList: List<EventEntity>)
+    fun saveLocalEventList(eventList: EventListEntity)
 }

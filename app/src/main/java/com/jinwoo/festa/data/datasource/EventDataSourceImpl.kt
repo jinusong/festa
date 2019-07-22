@@ -11,8 +11,8 @@ class EventDataSourceImpl(val api: Api, val eventDao: EventDao): EventDataSource
     override fun getRemoteEventList(pageSize: Int): Flowable<List<EventData>>
             = api.getEventList(pageSize = pageSize).map { it.rows }
 
-    override fun saveDbEventList(event: Event)
-            = eventDao.saveEventList(event)
+    override fun saveDbEventList(event: List<Event>)
+            = eventDao.saveEventList(*event.toTypedArray())
 
     override fun getDbEventList(): List<Event>
             = eventDao.getEventList()
