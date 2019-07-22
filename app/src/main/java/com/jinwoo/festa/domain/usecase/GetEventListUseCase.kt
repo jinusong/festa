@@ -8,6 +8,6 @@ import io.reactivex.disposables.CompositeDisposable
 
 class GetEventListUseCase(val service: EventService, composite: CompositeDisposable)
     : UseCase<EventListEntity, Int>(composite) {
-    override fun createFlowable(pageSize: Int): Flowable<EventListEntity>
-            = service.getEventList(pageSize)
+    override fun createFlowable(page: Int): Flowable<EventListEntity>
+            = service.getEventList(page)
 }

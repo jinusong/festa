@@ -7,9 +7,10 @@ interface MainContract{
     interface View: BaseContract.View {
         fun showEventListAdapter(models: ArrayList<EventModel>)
         fun createToast(text: String)
+        fun updateEventListAdapter(models: ArrayList<EventModel>)
     }
 
     interface Presenter: BaseContract.Presenter<View> {
-
+        fun showStartEventList()
     }
 }

@@ -19,8 +19,8 @@ class EventRepositoryImpl(val datasource: EventDataSource, val eventDataMapper: 
 
     private val mapEntityToDb: (EventEntity) -> Event = { eventDataMapper.mapEntityToDb(it) }
 
-    override fun getEventList(pageSize: Int): Flowable<EventListEntity>
-            = datasource.getRemoteEventList(pageSize).map { EventListEntity(true, mapDataListToEntityList(it)) }
+    override fun getEventList(page: Int): Flowable<EventListEntity>
+            = datasource.getRemoteEventList(page).map { EventListEntity(true, mapDataListToEntityList(it)) }
 
     override fun getLocalEventList(): EventListEntity
             = EventListEntity(false,datasource.getDbEventList().map { mapDbToEntity(it) })

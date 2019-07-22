@@ -5,7 +5,7 @@ import com.jinwoo.festa.data.entity.EventData
 import io.reactivex.Flowable
 
 interface EventDataSource {
-    fun getRemoteEventList(pageSize: Int): Flowable<List<EventData>>
+    fun getRemoteEventList(page: Int): Flowable<List<EventData>>
 
     fun saveDbEventList(event: List<Event>)
 
