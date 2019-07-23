@@ -9,7 +9,9 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.jinwoo.festa.R
 import com.jinwoo.festa.presentation.model.EventModel
+import com.jinwoo.festa.presentation.ui.EventDetailActivity
 import org.jetbrains.anko.find
+import org.jetbrains.anko.startActivity
 
 class EventListAdapter(val models: List<EventModel>): RecyclerView.Adapter<EventListAdapter.EventListViewHolder>() {
 
@@ -36,6 +38,10 @@ class EventListAdapter(val models: List<EventModel>): RecyclerView.Adapter<Event
                 itemEventName.text = eventName
                 itemEventHost.text = hostName
                 itemEventPrice.text = ticketPriceRange
+            }
+
+            itemView.setOnClickListener { v ->
+                v.context.startActivity<EventDetailActivity>()
             }
         }
     }

@@ -10,8 +10,6 @@ import com.jinwoo.festa.presentation.ui.base.BaseActivity
 import kotlinx.android.synthetic.main.activity_main.*
 import org.jetbrains.anko.toast
 import javax.inject.Inject
-import android.net.ConnectivityManager
-
 
 class MainActivity : BaseActivity(), MainContract.View {
 
