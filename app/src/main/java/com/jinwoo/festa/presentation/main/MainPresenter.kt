@@ -1,15 +1,11 @@
 package com.jinwoo.festa.presentation.main
 
-import com.jinwoo.festa.domain.entity.EventEntity
 import com.jinwoo.festa.domain.entity.EventListEntity
 import com.jinwoo.festa.domain.usecase.GetEventListUseCase
 import com.jinwoo.festa.presentation.base.BasePresenter
 import com.jinwoo.festa.presentation.mapper.EventModelMapper
 import com.jinwoo.festa.presentation.model.EventListModel
-import com.jinwoo.festa.presentation.model.EventModel
 import io.reactivex.subscribers.DisposableSubscriber
-import java.text.SimpleDateFormat
-import java.util.*
 import kotlin.collections.ArrayList
 
 class MainPresenter(val getEventListUseCase: GetEventListUseCase, val eventModelMapper: EventModelMapper)

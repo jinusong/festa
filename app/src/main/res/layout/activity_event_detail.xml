@@ -26,27 +26,62 @@
             <TextView
                     android:layout_margin="20dp"
                     android:id="@+id/detail_event_title_tv"
-                    android:textSize="24dp"
+                    android:textSize="22dp"
                     android:maxLines="2"
                     app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
+
+            <TextView
+                    android:id="@+id/detail_event_host_tv"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/detail_event_title_tv"
+                    android:textSize="14dp"
+                    android:maxLines="1"
+                    android:layout_margin="20dp"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"/>
 
             <TextView
                     android:id="@+id/detail_event_time_tv"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/detail_event_title_tv"
-                    android:textSize="18dp"
-                    android:maxLines="1"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/detail_event_host_tv"
+                    android:textSize="16dp"
+                    android:maxLines="2"
                     android:layout_margin="20dp"
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
+
+            <TextView
+                    android:textSize="16dp"
+                    android:layout_margin="20dp"
+                    android:id="@+id/detail_event_location_tv"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/detail_event_time_tv"
+                    android:maxLines="1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
+
+            <TextView
+                    android:textSize="16dp"
+                    android:layout_margin="20dp"
+                    android:id="@+id/detail_event_price_range_tv"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/detail_event_location_tv"
+                    android:maxLines="1"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"/>
 
             <CheckBox
                     android:layout_margin="20dp"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/detail_event_time_tv"
+                    app:layout_constraintTop_toBottomOf="@id/detail_event_price_range_tv"
                     android:layout_height="36dp"
                     android:layout_width="36dp"
                     android:id="@+id/detail_event_like_check"

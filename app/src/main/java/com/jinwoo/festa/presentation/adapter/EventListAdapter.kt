@@ -34,14 +34,14 @@ class EventListAdapter(val models: List<EventModel>): RecyclerView.Adapter<Event
         fun bind(model: EventModel) {
             with(model) {
                 Glide.with(itemEventImage).load(eventImageUrl).into(itemEventImage)
-                itemEventDate.text = eventDate
+                itemEventDate.text = startDate
                 itemEventName.text = eventName
                 itemEventHost.text = hostName
                 itemEventPrice.text = ticketPriceRange
             }
 
             itemView.setOnClickListener { v ->
-                v.context.startActivity<EventDetailActivity>()
+                v.context.startActivity<EventDetailActivity>("eventId" to model.eventId)
             }
         }
     }

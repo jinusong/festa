@@ -4,28 +4,37 @@ import com.jinwoo.festa.domain.entity.EventEntity
 import com.jinwoo.festa.domain.entity.TicketEntity
 import com.jinwoo.festa.domain.mapper.Mapper
 import com.jinwoo.festa.presentation.model.EventModel
+import com.jinwoo.festa.presentation.model.LikeModel
+import org.jsoup.Jsoup
 import java.text.SimpleDateFormat
 import java.util.*
 import kotlin.collections.ArrayList
 
 class EventModelMapper: Mapper<EventEntity, EventModel> {
 
-    override fun mapFrom(from: EventEntity): EventModel = EventModel(
+    val ticketModelMapper = TicketModelMapper()
+
+    override fun mapFrom(from: EventEntity): EventModel
+            = EventModel(
         eventId = from.eventId,
         eventName = from.eventName,
-        eventDate = createKoreaDate(from.eventDate),
-        ticketPriceRange = createTicketPriceRange(from.tickets),
+        startDate = createKoreaDate(from.startDate),
+        endDate = createKoreaDate(from.endDate),
+        tickets = from.tickets.map { ticketModelMapper.mapFrom(it) },
+        ticketPriceRange = createTicketPriceRange(from.tickets, from.ticketPriceRange),
         locationName = from.locationName,
         eventImageUrl = from.eventImageUrl,
-        hostName = from.hostName)
+        eventContents = parseEventContentsHtml(from.eventContents),
+        hostName = from.hostName,
+        like = LikeModel(from.like.eventId, from.like.isLike)
+    )
 
-
-
-    private fun createTicketPriceRange(tickets: List<TicketEntity>): String {
-        if (tickets.isEmpty()) return "외부 이벤트"
+    private fun createTicketPriceRange(tickets: List<TicketEntity>, ticketPriceRange: String): String {
+        if (tickets.isEmpty() && ticketPriceRange.isBlank()) return "외부 이벤트"
+        else if (ticketPriceRange.isNotBlank()) return ticketPriceRange
         else {
             val priceList = ArrayList<Int>()
-            tickets.forEach { ticket -> priceList.add(ticket.price) }
+            tickets.map { ticket -> priceList.add(ticket.price) }
 
             val topPrice = Collections.max(priceList)
             val rowPrice = Collections.min(priceList)
@@ -45,4 +54,7 @@ class EventModelMapper: Mapper<EventEntity, EventModel> {
         cal.add(Calendar.HOUR, 9)
         return transK.format(cal.time)
     }
+
+    private fun parseEventContentsHtml(html: String): String
+            = Jsoup.parse(html).text()
 }
