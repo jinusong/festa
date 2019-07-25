@@ -13,6 +13,8 @@ data class TicketData(
     val count: Int,
     @SerializedName("quantity")
     val quantity: Int,
+    @SerializedName("description")
+    val description: String,
     @SerializedName("limitPerUser")
     val limitPerUser: Int,
     @SerializedName("price")

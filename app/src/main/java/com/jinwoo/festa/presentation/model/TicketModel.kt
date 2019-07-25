@@ -6,6 +6,7 @@ data class TicketModel(
     val name: String,
     val count: Int,
     val quantity: Int,
+    val description: String,
     val limitPerUser: Int,
     val price: Int
 )

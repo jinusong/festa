@@ -14,6 +14,7 @@ class TicketDataMapper: Mapper<ArrayList<TicketData>, ArrayList<TicketEntity>> {
                 ticketId = it.ticketId,
                 count = it.count,
                 quantity = it.quantity,
+                description = it.description,
                 limitPerUser = it.limitPerUser,
                 name = it.name,
                 price = it.price
@@ -26,6 +27,7 @@ class TicketDataMapper: Mapper<ArrayList<TicketData>, ArrayList<TicketEntity>> {
         ticketId = from.ticketId,
         count = from.count,
         quantity = from.quantity,
+        description = from.description,
         limitPerUser = from.limitPerUser,
         name = from.name,
         price = from.price
@@ -37,6 +39,7 @@ class TicketDataMapper: Mapper<ArrayList<TicketData>, ArrayList<TicketEntity>> {
         ticketId = from.ticketId,
         count = from.count,
         quantity = from.quantity,
+        description = from.description,
         limitPerUser = from.limitPerUser,
         name = from.name,
         price = from.price

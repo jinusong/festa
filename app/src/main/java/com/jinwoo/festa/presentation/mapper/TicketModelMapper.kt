@@ -11,6 +11,7 @@ class TicketModelMapper: Mapper<TicketEntity, TicketModel> {
         ticketId = from.ticketId,
         count = from.count,
         quantity = from.quantity,
+        description = from.description,
         limitPerUser = from.limitPerUser,
         name = from.name,
         price = from.price

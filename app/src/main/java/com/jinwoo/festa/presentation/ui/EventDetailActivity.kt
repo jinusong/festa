@@ -1,8 +1,10 @@
 package com.jinwoo.festa.presentation.ui
 
 import android.os.Bundle
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
 import com.jinwoo.festa.R
+import com.jinwoo.festa.presentation.adapter.TicketListAdapter
 import com.jinwoo.festa.presentation.eventdetail.EventDetailContract
 import com.jinwoo.festa.presentation.model.EventModel
 import com.jinwoo.festa.presentation.ui.base.BaseActivity
@@ -40,6 +42,9 @@ class EventDetailActivity: BaseActivity(), EventDetailContract.View {
             detail_event_location_tv.text = "장소: $locationName"
             detail_event_price_range_tv.text = "티켓: $ticketPriceRange"
             detail_event_description_tv.text = eventContents
+
+            detail_event_ticket_rv.adapter = TicketListAdapter(tickets)
+            detail_event_ticket_rv.layoutManager = LinearLayoutManager(this@EventDetailActivity)
 
             if (like.isLike) {
                 detail_event_like_check.isChecked = true

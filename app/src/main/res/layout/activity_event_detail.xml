@@ -90,13 +90,25 @@
                     android:background="@drawable/ic_favorite_border_black_24dp"
                     android:stateListAnimator="@animator/scale"/>
 
+            <androidx.recyclerview.widget.RecyclerView
+                    app:layout_constraintTop_toBottomOf="@id/detail_event_like_check"
+                    app:layout_constraintBottom_toTopOf="@id/detail_event_description_tv"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    android:layout_margin="20dp"
+                    android:id="@+id/detail_event_ticket_rv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+
+            </androidx.recyclerview.widget.RecyclerView>
+
             <TextView
                     android:textSize="14dp"
                     android:layout_margin="20dp"
                     android:id="@+id/detail_event_description_tv"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/detail_event_like_check"
+                    app:layout_constraintTop_toBottomOf="@id/detail_event_ticket_rv"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"/>
 
