@@ -8,9 +8,11 @@ data class Event(
     @PrimaryKey
     val eventId: Int,
     val eventName: String,
-    var eventDate: String,
+    val startDate: String,
+    val endDate: String,
     val locationName: String,
     val eventImageUrl: String,
+    val eventContents: String,
     val hostName: String,
-    var ticketPriceRange: String
+    val ticketPriceRange: String
 )

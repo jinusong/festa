@@ -9,6 +9,8 @@ data class EventData(
     val name: String,
     @SerializedName("startDate")
     val startDate: String,
+    @SerializedName("endDate")
+    val endDate: String,
     @SerializedName("tickets")
     val tickets: ArrayList<TicketData>,
     @SerializedName("location")

@@ -10,4 +10,6 @@ interface EventDataSource {
     fun saveDbEventList(event: List<Event>)
 
     fun getDbEventList(): List<Event>
+
+    fun getDbEvent(eventId: Int): Flowable<Event>
 }

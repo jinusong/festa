@@ -16,4 +16,7 @@ class EventDataSourceImpl(val api: Api, val eventDao: EventDao): EventDataSource
 
     override fun getDbEventList(): List<Event>
             = eventDao.getEventList()
+
+    override fun getDbEvent(eventId: Int): Flowable<Event>
+            = eventDao.getEvent(eventId)
 }
