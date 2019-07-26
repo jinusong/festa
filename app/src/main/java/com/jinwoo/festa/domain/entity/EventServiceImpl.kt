@@ -1,6 +1,5 @@
 package com.jinwoo.festa.domain.entity
 
-import android.util.Log
 import io.reactivex.Flowable
 
 class EventServiceImpl(val eventRepo: EventRepository,
@@ -14,8 +13,6 @@ class EventServiceImpl(val eventRepo: EventRepository,
                 it.eventEntity.map { ticketRepo.saveTickets(it.tickets) }
             }
             .onErrorReturn {
-                Log.e("asd", it.toString())
-
                 val localEventList = eventRepo.getLocalEventList()
 
                 localEventList.eventEntity.map {
