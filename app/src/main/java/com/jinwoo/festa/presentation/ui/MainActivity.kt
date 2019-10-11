@@ -12,7 +12,6 @@ import kotlinx.android.synthetic.main.activity_main.*
 import org.jetbrains.anko.toast
 import javax.inject.Inject
 
-
 class MainActivity : BaseActivity(), MainContract.View {
 
     @Inject

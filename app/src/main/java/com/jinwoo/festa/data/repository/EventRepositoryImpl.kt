@@ -9,7 +9,8 @@ import com.jinwoo.festa.domain.entity.EventListEntity
 import com.jinwoo.festa.domain.entity.EventRepository
 import io.reactivex.Flowable
 
-class EventRepositoryImpl(val datasource: EventDataSource, val eventDataMapper: EventDataMapper): EventRepository {
+class EventRepositoryImpl(val datasource: EventDataSource, val eventDataMapper: EventDataMapper):
+    EventRepository {
 
     private val mapDataListToEntityList: (List<EventData>) -> List<EventEntity>
             = { it.map { eventDataMapper.mapFrom(it) } }
@@ -19,11 +20,21 @@ class EventRepositoryImpl(val datasource: EventDataSource, val eventDataMapper: 
 
     private val mapEntityToDb: (EventEntity) -> Event = { eventDataMapper.mapEntityToDb(it) }
 
-    override fun getEventList(page: Int): Flowable<EventListEntity>
-            = datasource.getRemoteEventList(page).map { EventListEntity(true, mapDataListToEntityList(it)) }
+    override fun getEventList(pageSize: Int): Flowable<EventListEntity>
+            = datasource.getRemoteEventList(pageSize).map {
+        EventListEntity(
+            true,
+            mapDataListToEntityList(it)
+        )
+    }
+
+    override fun getEventDetail(eventId: Int): Flowable<EventEntity>
+            = datasource.getDbEvent(eventId).map { mapDbToEntity(it) }
 
     override fun getLocalEventList(): EventListEntity
-            = EventListEntity(false,datasource.getDbEventList().map { mapDbToEntity(it) })
+            = EventListEntity(
+        false,
+        datasource.getDbEventList().map { mapDbToEntity(it) })
 
     override fun saveLocalEventList(eventList: EventListEntity)
             = datasource.saveDbEventList(eventList.eventEntity.map { mapEntityToDb(it) })

@@ -1,44 +1,38 @@
-package com.jinwoo.festa.presentation.di.module.main
+package com.jinwoo.festa.presentation.di.module.eventdetail
 
 import android.content.Context
+import androidx.room.Room
 import com.jinwoo.festa.data.Api
 import com.jinwoo.festa.data.database.EventDatabase
-import com.jinwoo.festa.data.mapper.EventDataMapper
-import com.jinwoo.festa.data.repository.EventRepositoryImpl
-import com.jinwoo.festa.domain.usecase.GetEventListUseCase
-import com.jinwoo.festa.presentation.di.scope.ActivityScope
-import com.jinwoo.festa.presentation.main.MainContract
-import com.jinwoo.festa.presentation.main.MainPresenter
-import com.jinwoo.festa.presentation.mapper.EventModelMapper
-import dagger.Module
-import dagger.Provides
-import io.reactivex.disposables.CompositeDisposable
-import androidx.room.Room
 import com.jinwoo.festa.data.database.LikeDatabase
 import com.jinwoo.festa.data.database.TicketDatabase
 import com.jinwoo.festa.data.database.dao.EventDao
 import com.jinwoo.festa.data.database.dao.LikeDao
 import com.jinwoo.festa.data.database.dao.TicketDao
 import com.jinwoo.festa.data.datasource.*
+import com.jinwoo.festa.data.mapper.EventDataMapper
 import com.jinwoo.festa.data.mapper.LikeDataMapper
 import com.jinwoo.festa.data.mapper.TicketDataMapper
+import com.jinwoo.festa.data.repository.EventRepositoryImpl
 import com.jinwoo.festa.data.repository.LikeRepositoryImpl
 import com.jinwoo.festa.data.repository.TicketRepositoryImpl
 import com.jinwoo.festa.domain.entity.*
-
+import com.jinwoo.festa.domain.usecase.GetEventDetailUseCase
+import com.jinwoo.festa.domain.usecase.SaveLikeUseCase
+import com.jinwoo.festa.presentation.di.scope.ActivityScope
+import com.jinwoo.festa.presentation.eventdetail.EventDetailContract
+import com.jinwoo.festa.presentation.eventdetail.EventDetailPresenter
+import com.jinwoo.festa.presentation.mapper.EventModelMapper
+import dagger.Module
+import dagger.Provides
+import io.reactivex.disposables.CompositeDisposable
 
 @Module
-class MainModule {
-    @ActivityScope
-    @Provides
-    fun provideTicketDatabase(context: Context): TicketDatabase
-            = Room.databaseBuilder(context, TicketDatabase::class.java, "ticket.db").build()
-
+class EventDetailModule {
     @ActivityScope
     @Provides
     fun provideEventDatabase(context: Context): EventDatabase
             = Room.databaseBuilder(context, EventDatabase::class.java, "event.db").build()
-
 
     @ActivityScope
     @Provides
@@ -47,7 +41,16 @@ class MainModule {
 
     @ActivityScope
     @Provides
+    fun provideTicketDatabase(context: Context): TicketDatabase
+            = Room.databaseBuilder(context, TicketDatabase::class.java, "ticket.db").build()
+
+    @ActivityScope
+    @Provides
     fun provideEventDao(database: EventDatabase): EventDao = database.eventDao
+
+    @ActivityScope
+    @Provides
+    fun provideLikeDao(database: LikeDatabase): LikeDao = database.likeDao
 
     @ActivityScope
     @Provides
@@ -55,7 +58,8 @@ class MainModule {
 
     @ActivityScope
     @Provides
-    fun provideLikeDao(database: LikeDatabase): LikeDao = database.likeDao
+    fun provideEventDataSource(api: Api, eventDao: EventDao): EventDataSource
+            = EventDataSourceImpl(api, eventDao)
 
     @ActivityScope
     @Provides
@@ -69,18 +73,13 @@ class MainModule {
 
     @ActivityScope
     @Provides
-    fun provideEventDataSource(api: Api, eventDao: EventDao): EventDataSource
-            = EventDataSourceImpl(api, eventDao)
+    fun provideEventRepository(eventDataSource: EventDataSource, eventDataMapper: EventDataMapper): EventRepository
+            = EventRepositoryImpl(eventDataSource, eventDataMapper)
 
     @ActivityScope
     @Provides
     fun provideLikeRepository(likeDataSource: LikeDataSource, likeDataMapper: LikeDataMapper): LikeRepository
             = LikeRepositoryImpl(likeDataSource, likeDataMapper)
-
-    @ActivityScope
-    @Provides
-    fun provideEventRepository(eventDataSource: EventDataSource, eventDataMapper: EventDataMapper): EventRepository
-            = EventRepositoryImpl(eventDataSource, eventDataMapper)
 
     @ActivityScope
     @Provides
@@ -95,8 +94,13 @@ class MainModule {
 
     @ActivityScope
     @Provides
-    fun provideGetEventListUseCase(eventService: EventService, composite: CompositeDisposable)
-            = GetEventListUseCase(eventService, composite)
+    fun provideGetEventDetailUseCase(eventService: EventService, composite: CompositeDisposable)
+            = GetEventDetailUseCase(eventService, composite)
+
+    @ActivityScope
+    @Provides
+    fun provideSaveLikeUseCase(eventService: EventService, composite: CompositeDisposable)
+            = SaveLikeUseCase(eventService, composite)
 
     @ActivityScope
     @Provides
@@ -116,7 +120,9 @@ class MainModule {
 
     @ActivityScope
     @Provides
-    fun providePresenter(getEventListUseCase: GetEventListUseCase,
-                         eventModelMapper: EventModelMapper): MainContract.Presenter
-            = MainPresenter(getEventListUseCase, eventModelMapper)
+    fun providePresenter(getEventListUseCase: GetEventDetailUseCase,
+                         saveLikeUseCase: SaveLikeUseCase,
+                         eventModelMapper: EventModelMapper
+    ): EventDetailContract.Presenter
+            = EventDetailPresenter(getEventListUseCase, saveLikeUseCase, eventModelMapper)
 }

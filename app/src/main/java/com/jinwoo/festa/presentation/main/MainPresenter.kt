@@ -5,7 +5,6 @@ import com.jinwoo.festa.domain.usecase.GetEventListUseCase
 import com.jinwoo.festa.presentation.base.BasePresenter
 import com.jinwoo.festa.presentation.mapper.EventModelMapper
 import com.jinwoo.festa.presentation.model.EventListModel
-import com.jinwoo.festa.presentation.model.EventModel
 import io.reactivex.subscribers.DisposableSubscriber
 import kotlin.collections.ArrayList
 
