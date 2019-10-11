@@ -3,8 +3,11 @@ package com.jinwoo.festa.domain.entity
 import io.reactivex.Flowable
 
 class EventServiceImpl(val repo: EventRepository): EventService {
-    override fun getEventList(pageSize: Int): Flowable<EventListEntity> =
-        repo.getEventList(pageSize)
+    override fun getEventList(page: Int): Flowable<EventListEntity> =
+        repo.getEventList(page)
             .doOnNext { repo.saveLocalEventList(it) }
-            .onErrorReturn { repo.getLocalEventList() }
+            .onErrorReturn {
+                val eventListEntity = repo.getLocalEventList()
+                EventListEntity(eventListEntity.isRemote, eventListEntity.eventEntity.reversed())
+            }
 }

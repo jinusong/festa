@@ -7,7 +7,7 @@ import retrofit2.http.Query
 
 interface Api {
     @GET("events")
-    fun getEventList(@Query("page") page: Int = 1
-                     , @Query("pageSize") pageSize: Int,
+    fun getEventList(@Query("page") page: Int,
+                     @Query("pageSize") pageSize: Int = 24,
                      @Query("order") order: String = "startDate"): Flowable<EventListDTO>
 }
