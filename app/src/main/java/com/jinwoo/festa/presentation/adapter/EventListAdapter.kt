@@ -13,7 +13,8 @@ import com.jinwoo.festa.presentation.ui.EventDetailActivity
 import org.jetbrains.anko.find
 import org.jetbrains.anko.startActivity
 
-class EventListAdapter(val models: List<EventModel>): RecyclerView.Adapter<EventListAdapter.EventListViewHolder>() {
+class EventListAdapter(val models: ArrayList<EventModel>)
+    : RecyclerView.Adapter<EventListAdapter.EventListViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): EventListViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.item_event_list, parent, false)
